@@ -6,20 +6,15 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserLoginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('fullname')
-            ->add('grade')
             ->add('mail')
-            ->add('mdp')
-            ->add('address')
-            ->add('id_resto')
-        ;
+            ->add('mdp', PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
