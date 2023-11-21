@@ -5,13 +5,12 @@
         <title>McDo : {% block title %}{% endblock %}</title>
         <link rel="icon" href="https://www.mcdonalds.fr/favicon.ico">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+        <link rel="stylesheet" href="/css/style.css?v=1"/>
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
