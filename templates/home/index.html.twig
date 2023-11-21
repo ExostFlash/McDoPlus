@@ -4,10 +4,15 @@
 
 {% block body %}
 
-<div>
-    <h1>Bienvenue à McDoPlus !</h1>
-
+<div class="center">
+    <h1>Bienvenue chez McDoPlus !</h1>
+    
+{% if not app.user %}
     compte utilisateur c'est <code><a href="/user">ici</a></code>
+{% endif %}
+{% if app.user and ('waiter' in app.user.roles or 'chef' in app.user.roles) %}
+   User roles: {{ app.user.roles|join(', ') }}
+{% endif %}
 
     <article>
         <h3>test</h3>

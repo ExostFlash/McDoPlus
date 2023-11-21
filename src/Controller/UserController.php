@@ -10,10 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     #[Route('/user', name: 'app_user')]
     public function index(): Response
     {
@@ -31,13 +39,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // Récupération du mot de passe en clair depuis le formulaire
-            $plainPassword = $form->get('mdp')->getData();
+            $plainPassword = $form->get('password')->getData();
 
             // Encodage sécurisé du mot de passe
-            $hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
+            $hashedPassword = $this->hasher->hashPassword(
+                $user_entity,
+                $plainPassword
+            );
 
             // Définition du mot de passe haché sur l'entité User
-            $user_entity->setMdp($hashedPassword);
+            $user_entity->setPassword($hashedPassword);
 
             // Enregistrement de l'utilisateur
             $entityManager->persist($user_entity);
@@ -49,14 +60,6 @@ class UserController extends AbstractController
 
         return $this->render('user/signup.html.twig', [
             'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/user/login', name: 'app_user_login')]
-    public function login(): Response
-    {
-        return $this->render('user/login.html.twig', [
-            'controller_name' => 'UserController',
         ]);
     }
 }
