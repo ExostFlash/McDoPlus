@@ -10,8 +10,8 @@
 {% if not app.user %}
     compte utilisateur c'est <code><a href="/user">ici</a></code>
 {% endif %}
-{% if app.user and ('waiter' in app.user.roles or 'chef' in app.user.roles) %}
-   User roles: {{ app.user.roles|join(', ') }}
+{% if app.user and ('Waiter' in app.user.grade or 'Chef' in app.user.grade or 'Root' in app.user.grade) %}
+   User roles: {{ app.user.grade }}
 {% endif %}
 
     <article>
