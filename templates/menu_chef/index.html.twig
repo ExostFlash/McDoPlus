@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu index{% endblock %}
+
+{% block body %}
+    <h1>Menu du resto {{ id_resto }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Entre</th>
+                <th>Plat</th>
+                <th>Dessert</th>
+                <th>Adresse</th>
+                <th>Chef</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for menu in menus %}
+            <tr>
+                <td>{{ menu.id }}</td>
+                <td>{{ menu.entre }}</td>
+                <td>{{ menu.plat }}</td>
+                <td>{{ menu.dessert }}</td>
+                
+                {% if restos[menu.idResto] is defined %}
+                    <td>{{ restos[menu.idResto].address }}</td>
+                {% else %}
+                    <td>Resto Not Found</td>
+                {% endif %}
+                
+                {% if users[menu.idUsers] is defined %}
+                    <td>{{ users[menu.idUsers].name }} {{ users[menu.idUsers].fullname }}</td>
+                {% else %}
+                    <td>User Not Found</td>
+                {% endif %}
+                <td>
+                    <a href="{{ path('app_menu_chef_show', {'id': menu.id}) }}">show</a>
+                    <a href="{{ path('app_menu_chef_edit', {'id': menu.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_menu_chef_new') }}">Create new</a>
+{% endblock %}
