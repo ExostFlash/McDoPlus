@@ -22,6 +22,7 @@ class MenuChefController extends AbstractController
     private $id_user;
     private $userRepository;
     private $restoRepository;
+    private $role_user;
 
     public function __construct(userRepository $userRepository, restoRepository $restoRepository, Security $security)
     {
@@ -30,8 +31,11 @@ class MenuChefController extends AbstractController
 
         $user = $userRepository->findOneBy(['email' => $email_user]);
 
+        $role_user = $user->getGrade();
         $id_resto = $user->getIdResto();
         $id_user = $user->getId();
+
+        $this->role_user = $role_user;
         $this->id_resto = $id_resto;
         $this->id_user = $id_user;
         $this->userRepository = $userRepository;
@@ -40,10 +44,9 @@ class MenuChefController extends AbstractController
     #[Route('/', name: 'app_menu_chef_index', methods: ['GET'])]
     public function index(MenuRepository $menuRepository): Response
     {
-        if ($this->id_resto != '') {
+        if ($this->role_user != 'Root') {
             $menus = $menuRepository->findBy(['id_resto' => $this->id_resto]);
         } else {
-            $this->id_resto = 0;
             $menus = $menuRepository->findAll();
         }
 
@@ -69,7 +72,6 @@ class MenuChefController extends AbstractController
             'menus' => $menus,
             'users' => $users,
             'restos' => $restos,
-            'id_resto' => $this->id_resto,
         ]);
     }
 

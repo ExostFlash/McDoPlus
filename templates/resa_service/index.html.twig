@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resa index{% endblock %}
+
+{% block body %}
+    <h1>Resa index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id_resto</th>
+                <th>Nb_user</th>
+                <th>Date_heur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resa in resas %}
+            <tr>
+                <td>{{ resa.id }}</td>
+                <td>{{ resa.idResto }}</td>
+                <td>{{ resa.nbUser }}</td>
+                <td>{{ resa.dateHeur ? resa.dateHeur|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_resa_service_show', {'id': resa.id}) }}">show</a>
+                    <a href="{{ path('app_resa_service_edit', {'id': resa.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -33,6 +33,7 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_Root }
     - { path: ^/chef, roles: "ROLE_Root, ROLE_Chef" }
+    - { path: ^/service, roles: "ROLE_Root, ROLE_Chef, ROLE_Waiter" }
     # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
