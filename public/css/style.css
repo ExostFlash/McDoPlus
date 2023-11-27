@@ -14,10 +14,14 @@ nav {
 
 .logo-image,
 .account-image {
-  width: 50px; /* Ajustez la taille des images */
-  height: 50px; /* Ajoutez cette propriété pour maintenir la proportion */
+  width: 75px; /* Ajustez la taille des images */
+  height: 75px; /* Ajoutez cette propriété pour maintenir la proportion */
   object-fit: cover; /* Pour ajuster l'image sans déformer la proportion */
   border-radius: 50%; /* Pour un effet de cercle */
+}
+
+.account-image {
+  border: 3px solid green;
 }
 
 .user-account {
@@ -32,7 +36,7 @@ nav {
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
-  background-color: #18232c;
+  background-color: var(--code-background-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
