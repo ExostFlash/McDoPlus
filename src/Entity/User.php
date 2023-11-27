@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id_resto = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $grade = "client";
+    private ?string $grade = "Client";
 
     public function getId(): ?int
     {

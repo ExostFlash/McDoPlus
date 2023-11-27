@@ -3,28 +3,32 @@
 {% block title %}Avis{% endblock %}
 
 {% block body %}
+<div class="center">
     <h1>Avis</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ avi.id }}</td>
-            </tr>
-            <tr>
-                <th>Note</th>
-                <td>{{ avi.note }}</td>
-            </tr>
-            <tr>
-                <th>Com</th>
-                <td>{{ avi.com }}</td>
-            </tr>
-            <tr>
-                <th>Id_ticket</th>
-                <td>{{ avi.idTicket }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <article>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ avi.id }}</td>
+                </tr>
+                <tr>
+                    <th>Note</th>
+                    <td>{{ avi.note }}</td>
+                </tr>
+                <tr>
+                    <th>Com</th>
+                    <td>{{ avi.com }}</td>
+                </tr>
+                <tr>
+                    <th>Id_ticket</th>
+                    <td>{{ avi.idTicket }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_avis_index') }}">back to list</a>
+        <a href="{{ path('app_avis_index') }}">back to list</a>
+    </article>
+</div>
 {% endblock %}

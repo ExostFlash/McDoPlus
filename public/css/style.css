@@ -4,3 +4,44 @@ body .center {
   width: 95%;
   font: 18px/1.5 sans-serif;
 }
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.logo-image,
+.account-image {
+  width: 50px; /* Ajustez la taille des images */
+  height: 50px; /* Ajoutez cette propriété pour maintenir la proportion */
+  object-fit: cover; /* Pour ajuster l'image sans déformer la proportion */
+  border-radius: 50%; /* Pour un effet de cercle */
+}
+
+.user-account {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-text {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: #18232c;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.user-account:hover .hover-text {
+  display: block;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -3,9 +3,13 @@
 {% block title %}New Menu{% endblock %}
 
 {% block body %}
+<div class="center">
     <h1>Create new Menu</h1>
+    
+    <article>
+        {{ include('menu_chef/_form.html.twig') }}
 
-    {{ include('menu_chef/_form.html.twig') }}
-
-    <a href="{{ path('app_menu_chef_index') }}">back to list</a>
+        <a href="{{ path('app_menu_chef_index') }}">back to list</a>
+    </article>
+</div>
 {% endblock %}

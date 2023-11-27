@@ -3,11 +3,13 @@
 {% block title %}Edit Menu{% endblock %}
 
 {% block body %}
+<div class="center">
     <h1>Edit Menu</h1>
+    <article>
+        {{ include('menu_chef/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('menu_chef/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_menu_chef_index') }}">back to list</a>
-
-    {{ include('menu_chef/_delete_form.html.twig') }}
+        {{ include('menu_chef/_delete_form.html.twig') }}
+        <a href="{{ path('app_menu_chef_index') }}">back to list</a>
+    </article>
+</div>
 {% endblock %}

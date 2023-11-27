@@ -5,10 +5,9 @@
 {% block body %}
 
 <div class="center">
-    <h1>Bienvenue chez McDoPlus !</h1>
     
 {% if not app.user %}
-    <p>compte utilisateur c'est <code><a href="/user">ici</a></code></p>
+    <h1>Bienvenue chez McDoPlus !</h1>
     <h5>Menu par Resto :</h5>
     <ul>
     {% for resto in restos %}
@@ -16,7 +15,7 @@
     {% endfor %}
     </ul>
 {% else %}
-    <p>Laisser un avis <code><a href="/avis">ici</a></code></p>
+    <h1>Salut {{ app.user.email }}</h1>
     <h5>Réserver/Commander :</h5>
     <ul>
     {% for resto in restos %}

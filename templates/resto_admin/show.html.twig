@@ -3,32 +3,36 @@
 {% block title %}Resto{% endblock %}
 
 {% block body %}
+<div class="center">
     <h1>Resto</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ resto.id }}</td>
-            </tr>
-            <tr>
-                <th>Pay</th>
-                <td>{{ resto.pay }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ resto.ville }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ resto.address }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <article>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ resto.id }}</td>
+                </tr>
+                <tr>
+                    <th>Pay</th>
+                    <td>{{ resto.pay }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ resto.ville }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ resto.address }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_resto_admin_index') }}">back to list</a>
+        <p><a href="{{ path('app_resto_admin_edit', {'id': resto.id}) }}">edit</a></p>
 
-    <a href="{{ path('app_resto_admin_edit', {'id': resto.id}) }}">edit</a>
+        {{ include('resto_admin/_delete_form.html.twig') }}
 
-    {{ include('resto_admin/_delete_form.html.twig') }}
+        <a href="{{ path('app_resto_admin_index') }}">back to list</a>
+    </article>
+</div>
 {% endblock %}

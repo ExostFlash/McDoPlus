@@ -14,6 +14,42 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="center">
+            <a href="/" class="logo">
+                <img src="https://www.edigitalagency.com.au/wp-content/uploads/McDonalds-logo-png.png" alt="Logo McDonald's" class="logo-image" />
+            </a>
+            McDo
+            <div class="user-account">
+                <img src="https://icon-library.com/images/profile-icon-white/profile-icon-white-22.jpg" alt="Image de compte utilisateur" class="account-image" />
+                <div class="hover-text">
+                    {% if not app.user %}
+                        <div class="list">
+                            <span><a href="/user/login">Connexion</a></span>
+                            <span><a href="/user/signup">Inscription</a></span>
+                        </div>
+                    {% else %}
+                        <div class="list">
+                            <span>{{ app.user.email }}</span>
+                            {% set roles = app.user.roles %}
+                            {% if 'ROLE_Root' in roles or 'ROLE_Waiter' in roles or 'ROLE_Chef' in roles %}
+                                <span><a href="/service/ticket">Ticket</a></span>
+                                <span><a href="/service/resa">Réservation</a></span>
+                            {% endif %}
+                            {% if 'ROLE_Root' in roles or 'ROLE_Chef' in roles %}
+                                <span><a href="/chef/menu">Menu</a></span>
+                            {% endif %}
+                            {% if 'ROLE_Root' in roles %}
+                                <span><a href="/admin/user">User</a></span>
+                                <span><a href="/admin/resto">Restaurant</a></span>
+                            {% endif %}
+                            <span><a href="/avis">Avis</a></span>
+                            <span><a href="/user/logout">Logout</a></span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
         {% block body %}{% endblock %}
     </body>
 </html>
