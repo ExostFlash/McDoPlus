@@ -9,12 +9,18 @@
     
 {% if not app.user %}
     <p>compte utilisateur c'est <code><a href="/user">ici</a></code></p>
+    <h5>Menu par Resto :</h5>
+    <ul>
+    {% for resto in restos %}
+        <li><code><a href="{{ path('app_home_menu', {'idresto': resto.id}) }}">{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</a></code></li>
+    {% endfor %}
+    </ul>
 {% else %}
     <p>Laisser un avis <code><a href="/avis">ici</a></code></p>
     <h5>Réserver/Commander :</h5>
     <ul>
     {% for resto in restos %}
-    <li><code><a href="{{ path('app_home_choice', {'idresto': resto.id}) }}">{{ resto.address }}</a></code></li>
+        <li><code><a href="{{ path('app_home_choice', {'idresto': resto.id}) }}">{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</a></code></li>
     {% endfor %}
     </ul>
 {% endif %}

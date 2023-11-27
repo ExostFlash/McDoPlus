@@ -22,23 +22,28 @@ class HomeController extends AbstractController
     private $restoRepository;
     private $menuRepository;
     private $role_user;
-    public function __construct(userRepository $userRepository, restoRepository $restoRepository, menuRepository $menuRepository, Security $security)
+    public function __construct(UserRepository $userRepository, RestoRepository $restoRepository, MenuRepository $menuRepository, Security $security)
     {
-        $utilisateur = $security->getUser();
-        $email_user = $utilisateur->getUserIdentifier();
-
-        $user = $userRepository->findOneBy(['email' => $email_user]);
-
-        $role_user = $user->getGrade();
-        $id_resto = $user->getIdResto();
-        $id_user = $user->getId();
-
-        $this->role_user = $role_user;
-        $this->id_resto = $id_resto;
-        $this->id_user = $id_user;
         $this->userRepository = $userRepository;
         $this->restoRepository = $restoRepository;
         $this->menuRepository = $menuRepository;
+
+        $utilisateur = $security->getUser();
+
+        if ($utilisateur != null) {
+            $email_user = $utilisateur->getUserIdentifier();
+            $user = $userRepository->findOneBy(['email' => $email_user]);
+
+            if ($user) {
+                $role_user = $user->getGrade();
+                $id_resto = $user->getIdResto();
+                $id_user = $user->getId();
+
+                $this->role_user = $role_user;
+                $this->id_resto = $id_resto;
+                $this->id_user = $id_user;
+            }
+        }
     }
 
     #[Route('/', name: 'app_home')]
@@ -52,7 +57,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{idresto}', name: 'app_home_choice')]
+    #[Route('/choix/{idresto}', name: 'app_home_choice')]
     public function choice($idresto): Response
     {
         $resto = $this->restoRepository->find($idresto);
@@ -65,7 +70,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{idresto}/resa', name: 'app_home_resa')]
+    #[Route('/resa/{idresto}', name: 'app_home_resa')]
     public function resa(): Response
     {
         return $this->render('home/resa.html.twig', [
@@ -73,9 +78,12 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{idresto}/{idmenu}', name: 'app_home_ticket')]
+    #[Route('/ticket/{idresto}/{idmenu}', name: 'app_home_ticket')]
     public function ticket($idresto, $idmenu, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $idresto = (int) $idresto;
+        $idmenu = (int) $idmenu;
+
         $ticket = new Ticket();
         $ticket->setIdResto($idresto);
         $ticket->setIdUsers($this->id_user);
@@ -90,5 +98,18 @@ class HomeController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/menu/{idresto}', name: 'app_home_menu')]
+    public function menu($idresto): Response
+    {
+        $resto = $this->restoRepository->find($idresto);
+        $menus = $this->menuRepository->findBy(['id_resto' => $idresto]);
+
+        return $this->render('home/menu.html.twig', [
+            'controller_name' => 'Home',
+            'resto' => $resto,
+            'menus' => $menus,
+        ]);
     }
 }

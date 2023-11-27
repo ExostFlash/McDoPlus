@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choix{% endblock %}
+{% block title %}Menu{% endblock %}
 
 {% block body %}
 
 <div class="center">
-    <h1>Commande/Resa</h1>
+    <h1>Menu</h1>
     <h5>{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</h5>
-
-    <p>Vous souhaitez reserver au restaurant : <code><a href="{{ path('app_home_resa', {'idresto': resto.id}) }}">C'est par ici !</a></code>
 
     {% for menu in menus %}
         <article>
@@ -18,7 +16,6 @@
                 <li><code>Plat :</code> {{ menu.plat }}</li>
                 <li><code>Dessert :</code> {{ menu.dessert }}</li>
             </ul>
-            <code><a href="{{ path('app_home_ticket', {'idresto': resto.id, 'idmenu': menu.id}) }}">Commandez en ligne ce menu !</a></code>
         </article>
     {% endfor %}
 
