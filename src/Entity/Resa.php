@@ -18,10 +18,16 @@ class Resa
     private ?int $id_resto = null;
 
     #[ORM\Column]
+    private ?int $id_user = null;
+
+    #[ORM\Column]
     private ?int $nb_user = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_heur = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $jour = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $heur = null;
 
     public function getId(): ?int
     {
@@ -40,6 +46,18 @@ class Resa
         return $this;
     }
 
+    public function getIdUser(): ?int
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(int $id_user): static
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
     public function getNbUser(): ?int
     {
         return $this->nb_user;
@@ -52,14 +70,26 @@ class Resa
         return $this;
     }
 
-    public function getDateHeur(): ?\DateTimeInterface
+    public function getJour(): ?\DateTimeInterface
     {
-        return $this->date_heur;
+        return $this->jour;
     }
 
-    public function setDateHeur(\DateTimeInterface $date_heur): static
+    public function setJour(\DateTimeInterface $jour): static
     {
-        $this->date_heur = $date_heur;
+        $this->jour = $jour;
+
+        return $this;
+    }
+
+    public function getHeur(): ?\DateTimeInterface
+    {
+        return $this->heur;
+    }
+
+    public function setHeur(\DateTimeInterface $heur): static
+    {
+        $this->heur = $heur;
 
         return $this;
     }

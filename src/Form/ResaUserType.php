@@ -14,12 +14,15 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Validator\Constraints\Range;
 
-class ResaType extends AbstractType
+class ResaUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id_resto')
+            ->add('id_resto', HiddenType::class, [
+                'disabled' => true, // Désactive le champ
+                'data' => $options['data']->getIdResto() // Remplacez $valeurSpecifique par la valeur souhaitée
+            ])
             ->add('id_user', HiddenType::class, [
                 'disabled' => true, // Désactive le champ
                 'data' => $options['data']->getIdUser() // Remplacez $valeurSpecifique par la valeur souhaitée

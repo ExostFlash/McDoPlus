@@ -3,32 +3,42 @@
 {% block title %}Resa{% endblock %}
 
 {% block body %}
+<div class="center">
     <h1>Resa</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ resa.id }}</td>
-            </tr>
-            <tr>
-                <th>Id_resto</th>
-                <td>{{ resa.idResto }}</td>
-            </tr>
-            <tr>
-                <th>Nb_user</th>
-                <td>{{ resa.nbUser }}</td>
-            </tr>
-            <tr>
-                <th>Date_heur</th>
-                <td>{{ resa.dateHeur ? resa.dateHeur|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <article>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ resa.id }}</td>
+                </tr>
+                <tr>
+                    <th>Id_resto</th>
+                    <td>{{ resa.idResto }}</td>
+                </tr>
+                <tr>
+                    <th>Id_user</th>
+                    <td>{{ resa.idUser }}</td>
+                </tr>
+                <tr>
+                    <th>Nb_user</th>
+                    <td>{{ resa.nbUser }}</td>
+                </tr>
+                <tr>
+                    <th>Jour</th>
+                    <td>{{ resa.jour ? resa.jour|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Heur</th>
+                    <td>{{ resa.heur ? resa.heur|date('H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_resa_service_index') }}">back to list</a>
+        {{ include('resa_service/_delete_form.html.twig') }}
 
-    <a href="{{ path('app_resa_service_edit', {'id': resa.id}) }}">edit</a>
-
-    {{ include('resa_service/_delete_form.html.twig') }}
+        <a href="{{ path('app_resa_service_index') }}">back to list</a>
+    </article>
+</div>
 {% endblock %}

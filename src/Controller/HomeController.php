@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Ticket;
+use App\Entity\Resa;
 use App\Form\Ticket2Type;
+use App\Form\ResaUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
@@ -71,10 +73,27 @@ class HomeController extends AbstractController
     }
 
     #[Route('/resa/{idresto}', name: 'app_home_resa')]
-    public function resa(): Response
+    public function resas($idresto, Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('home/resa.html.twig', [
-            'controller_name' => 'Home',
+        $id_user = $this->id_user;
+
+        $resa = new Resa();
+        $resa->setIdUser($id_user);
+        $resa->setIdResto($idresto);
+
+        $form = $this->createForm(ResaUserType::class, $resa);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($resa);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('home/resa.html.twig', [
+            'resa' => $resa,
+            'form' => $form,
         ]);
     }
 

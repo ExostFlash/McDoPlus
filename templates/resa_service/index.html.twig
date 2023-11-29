@@ -5,13 +5,16 @@
 {% block body %}
     <h1>Resa index</h1>
 
+    <p>Jour suivant : <a href="{{ path('app_resa_service_jour', {'datej': j1|date('Y-m-d')}) }}">{{ j1|date('Y-m-d') }}</a></p>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Id_resto</th>
+                <th>Id_user</th>
                 <th>Nb_user</th>
-                <th>Date_heur</th>
+                <th>Jour</th>
+                <th>Heur</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,18 +23,24 @@
             <tr>
                 <td>{{ resa.id }}</td>
                 <td>{{ resa.idResto }}</td>
+                {% if users[resa.idUser] is defined %}
+                    <td>{{ users[resa.idUser].name }}</td>
+                {% else %}
+                    <td>User Not Found</td>
+                {% endif %}
                 <td>{{ resa.nbUser }}</td>
-                <td>{{ resa.dateHeur ? resa.dateHeur|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resa.jour ? resa.jour|date('Y-m-d') : '' }}</td>
+                <td>{{ resa.heur ? resa.heur|date('H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_resa_service_show', {'id': resa.id}) }}">show</a>
-                    <a href="{{ path('app_resa_service_edit', {'id': resa.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('app_resa_service_new') }}">Create new</a>
 {% endblock %}
