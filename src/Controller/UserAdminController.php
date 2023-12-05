@@ -65,17 +65,6 @@ class UserAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('password')->getData();
-
-            // Encodage sécurisé du mot de passe
-            $hashedPassword = $this->hasher->hashPassword(
-                $user,
-                $plainPassword
-            );
-
-            // Définition du mot de passe haché sur l'entité User
-            $user->setPassword($hashedPassword);
-
             // Enregistrement de l'utilisateur
             $entityManager->persist($user);
             $entityManager->flush();
