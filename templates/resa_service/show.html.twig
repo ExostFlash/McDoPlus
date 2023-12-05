@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Resa{% endblock %}
+{% block title %}Réservation{% endblock %}
 
 {% block body %}
 <div class="center">
-    <h1>Resa</h1>
+    <h1>Réservation</h1>
 
     <article>
         <table class="table">
@@ -30,7 +30,7 @@
                     <td>{{ resa.jour ? resa.jour|date('Y-m-d') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Heur</th>
+                    <th>Heure</th>
                     <td>{{ resa.heur ? resa.heur|date('H:i:s') : '' }}</td>
                 </tr>
             </tbody>

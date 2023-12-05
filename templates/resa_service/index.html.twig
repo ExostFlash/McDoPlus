@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Resa index{% endblock %}
+{% block title %}Réservation index{% endblock %}
 
 {% block body %}
-    <h1>Resa index</h1>
+    <h1>Réservation index</h1>
 
     <p>Jour suivant : <a href="{{ path('app_resa_service_jour', {'datej': j1|date('Y-m-d')}) }}">{{ j1|date('Y-m-d') }}</a></p>
     <table class="table">

@@ -8,23 +8,12 @@
     
 {% if not app.user %}
     <h1>Bienvenue chez McDoPlus !</h1>
-    <h5>Tous les menus sont à <code><span style="font-size: 35px;">25€</span></code></h5>
-    <ul class="center">
-        <li>Entrer</li>
-        <li>Plat</li>
-        <li>Dessert</li>
-    </ul>
-    <h6>Réserver/Commander :</h6>
-    <ul class="center">
-    {% for resto in restos %}
-        <li><code><a href="{{ path('app_home_choice', {'idresto': resto.id}) }}">{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</a></code></li>
-    {% endfor %}
-    </ul>
 {% else %}
     <h1>Salut {{ app.user.email }}</h1>
+{% endif %}
     <h5>Tous les menus sont à <code><span style="font-size: 35px;">25€</span></code></h5>
     <ul class="center">
-        <li>Entrer</li>
+        <li>Entrée</li>
         <li>Plat</li>
         <li>Dessert</li>
     </ul>
@@ -34,6 +23,5 @@
         <li><code><a href="{{ path('app_home_choice', {'idresto': resto.id}) }}">{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</a></code></li>
     {% endfor %}
     </ul>
-{% endif %}
 </div>
 {% endblock %}

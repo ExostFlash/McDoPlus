@@ -8,7 +8,7 @@
     <h1>Commande/Resa</h1>
     <h5>{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</h5>
 {% if  app.user %}
-    <p>Vous souhaitez reserver au restaurant : <code><a href="{{ path('app_home_resa', {'idresto': resto.id}) }}">C'est par ici !</a></code>
+    <p>Vous souhaitez réserver au restaurant : <code><a href="{{ path('app_home_resa', {'idresto': resto.id}) }}">C'est par ici !</a></code>
 {% endif %}
 
     {% for menu in menus %}
