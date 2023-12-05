@@ -6,7 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserType extends AbstractType
 {
@@ -22,8 +23,9 @@ class UserType extends AbstractType
             ->add('email', null, [
                 'attr' => ['placeholder' => 'exemple@exostflash.ovh']
             ])
-            ->add('password', PasswordType::class, [
-                'attr' => ['placeholder' => 'Entrez votre mot de passe']
+            ->add('password', HiddenType::class, [
+                'disabled' => true, // Désactive le champ
+                'data' => $options['data']->getPassword() // Remplacez $valeurSpecifique par la valeur souhaitée
             ])
             ->add(
                 'address',
@@ -32,8 +34,17 @@ class UserType extends AbstractType
                     'attr' => ['placeholder' => '265 chemin de l\'exemple, 31840 Exemple']
                 ]
             )
-            ->add('grade', null, [
-                'attr' => ['placeholder' => 'Client/Waiter/Chef/Root']
+            ->add('grade', ChoiceType::class, [
+                'placeholder' => 'Sélectionner le grade',
+                'choices' => [
+                    'Client' => 'Client',
+                    'Waiter' => 'Waiter',
+                    'Chef' => 'Chef',
+                    'Root' => 'Root',
+                ],
+                'attr' => [
+                    'placeholder' => 'Client/Waiter/Chef/Root' // Ce placeholder peut ne pas être pris en compte pour les choix définis ici
+                ],
             ])
             ->add('id_resto');
     }
