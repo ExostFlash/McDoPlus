@@ -17,7 +17,7 @@
     <h6>Réserver/Commander :</h6>
     <ul class="center">
     {% for resto in restos %}
-        <li><code><a href="{{ path('app_home_menu', {'idresto': resto.id}) }}">{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</a></code></li>
+        <li><code><a href="{{ path('app_home_choice', {'idresto': resto.id}) }}">{{ resto.address }}, {{ resto.ville }}, {{ resto.pay }}</a></code></li>
     {% endfor %}
     </ul>
 {% else %}

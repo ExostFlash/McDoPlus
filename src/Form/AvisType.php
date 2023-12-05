@@ -21,7 +21,7 @@ class AvisType extends AbstractType
                 [
                     'attr' => [
                         'min' => 1, // Valeur minimale autorisée
-                        'max' => 10, // Valeur maximale autorisée
+                        'max' => 5, // Valeur maximale autorisée
                     ],
                     'data' => 1, // Valeur par défaut
                     'constraints' => [

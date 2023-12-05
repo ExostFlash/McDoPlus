@@ -6,7 +6,7 @@
         <link rel="icon" href="https://www.mcdonalds.fr/favicon.ico">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
 
-        <link rel="stylesheet" href="/css/style.css?v=1"/>
+        <link rel="stylesheet" href="/css/style.css?v=2"/>
         {% block stylesheets %}
         {% endblock %}
 
@@ -20,14 +20,17 @@
             </a>
             McDo
             <div class="user-account">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTKH9wi35hrzL8VwoC21_g64uU6_Vwn7kR2Do__YnDJYg-2rXyi8ACbaYz-JrrqmKAS3Y&usqp=CAU" alt="Image de compte utilisateur" class="account-image" />
-                <div class="hover-text">
                     {% if not app.user %}
+                    <img src="https://icones.pro/wp-content/uploads/2022/07/icones-d-administration-vert.png" alt="Image de compte utilisateur" class="account-image" />
+                    <div class="hover-text">
                         <div class="list">
                             <span><a href="/user/login">Connexion</a></span>
                             <span><a href="/user/signup">Inscription</a></span>
                         </div>
+                    </div>
                     {% else %}
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTKH9wi35hrzL8VwoC21_g64uU6_Vwn7kR2Do__YnDJYg-2rXyi8ACbaYz-JrrqmKAS3Y&usqp=CAU" alt="Image de compte utilisateur" class="account-image" />
+                    <div class="hover-text">
                         <div class="list">
                             <span>{{ app.user.email }}</span>
                             {% set roles = app.user.roles %}
@@ -45,8 +48,8 @@
                             <span><a href="/avis">Avis</a></span>
                             <span><a href="/user/logout">Logout</a></span>
                         </div>
+                    </div>
                     {% endif %}
-                </div>
             </div>
         </nav>
 

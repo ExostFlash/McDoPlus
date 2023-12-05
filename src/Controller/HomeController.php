@@ -118,17 +118,4 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
-
-    #[Route('/menu/{idresto}', name: 'app_home_menu')]
-    public function menu($idresto): Response
-    {
-        $resto = $this->restoRepository->find($idresto);
-        $menus = $this->menuRepository->findBy(['id_resto' => $idresto]);
-
-        return $this->render('home/menu.html.twig', [
-            'controller_name' => 'Home',
-            'resto' => $resto,
-            'menus' => $menus,
-        ]);
-    }
 }
