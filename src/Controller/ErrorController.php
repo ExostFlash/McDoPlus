@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ErrorController extends AbstractController
 {
     #[Route('/403', name: 'access_denied')]
-
     public function accessDenied(): Response
     {
         return $this->render('error/access_denied.html.twig', []);
